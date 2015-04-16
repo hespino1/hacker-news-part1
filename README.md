@@ -9,7 +9,7 @@
 
 ## Summary
 
-We're going to build a [Hacker News][] clone in Sinatra.  This will be the most
+We're going to build a [Hacker News][] clone in Rails.  This will be the most
 fully-featured web application we've built so far.  Excited?!
 
 ## Part 1: Users, Posts and Comments
@@ -50,22 +50,9 @@ Also, don't worry about Hacker News' fancy sorting algorithms for the post
 homepage and comment threads.  Just sort them in some simple way:
 chronologically, alphabetically, etc.
 
-#### Routes
-
-Give some thought to your controller routes before creating them. Consider
-following the RESTful routing convention instead of coming up with your own
-convention. Here are some routes to get you thinking in a RESTful way:
 
 
-|                             | HTTP Verb | URL                 |
-|-----------------------------|-----------|---------------------|
-| View all posts              | GET       | /posts              |
-| View a single post          | GET       | /posts/:id          |
-| Add a comment to a post     | POST      | /posts/:id/comments |
-| View all comments by a user | GET       | /users/:id/comments |
-
-
-### Release 2 : Views
+### Release 1 : Views
 
 Implement all the views.  Don't worry about AJAX at first.
 
