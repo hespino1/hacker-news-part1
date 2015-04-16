@@ -1,0 +1,23 @@
+<h1>Hacker News</h1>
+
+<table>
+	<thead>
+		<th>#</th>
+		<th>Vote</th>
+		<th># of Votes</th>
+		<th>Title</th>
+	</thead>
+	<tbody>
+		<% @posts.each do |post| %>
+			<tr>
+				<td><%= @counter += 1%></td>
+				<td><%= link_to "^", posts_upvote_path(:post_id => post.id)%></td>				
+				<td><%= post.votes.count %></td>
+				<td><%= post.title %></td>
+			</tr>
+		<% end %>
+
+	</tbody>
+
+
+</table>
