@@ -1,0 +1,31 @@
+$(document).ready(function(){
+	$(".create").on('click', function(e){
+		console.log("**********")
+		$.ajax ({
+			url: "/posts/form",
+			type: "GET"
+		}).done(function(response){
+			$(".form-container").append(response);
+			$(".create").hide();
+		});
+	})	
+	$(".form-container").on('submit', function(e){
+		e.preventDefault();
+		$.ajax ({
+			url: "/posts",
+			type: "POST",
+			data: $('form').serialize()
+		}).done(function(response){
+			console.log(response);
+			$(".create").show();
+			$(".form-container").hide();
+			console.log(response.id)
+			var counter = $("tr:last-child").find("td:first-child").text();
+			console.log("<td><a href=/posts/upvote?post_id="+response.id+">^</a></td>")
+			console.log("<td><a rel='nofollow' data-method='delete' href='/posts/" + response.id + "'>Delete</a></td>")
+
+			
+		})
+
+	})
+});

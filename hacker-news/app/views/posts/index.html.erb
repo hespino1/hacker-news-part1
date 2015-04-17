@@ -1,19 +1,24 @@
 <h1>Hacker News</h1>
 
+<%#= link_to "Create a Post", posts_form_path, class: "create" %>
+<button class="create">New Post</button>
+<div class="form-container"></div>
 <table>
 	<thead>
 		<th>#</th>
 		<th>Vote</th>
 		<th># of Votes</th>
 		<th>Title</th>
+		<th>Action</th>
 	</thead>
-	<tbody>
+	<tbody class="table">
 		<% @posts.each do |post| %>
 			<tr>
 				<td><%= @counter += 1%></td>
 				<td><%= link_to "^", posts_upvote_path(:post_id => post.id)%></td>				
 				<td><%= post.votes.count %></td>
 				<td><%= post.title %></td>
+				<td><%= link_to "Delete", post_path(post), method: :delete %></td>
 			</tr>
 		<% end %>
 
