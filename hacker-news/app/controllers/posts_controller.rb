@@ -17,8 +17,6 @@ class PostsController < ApplicationController
   def create
   	@post = Post.new(post_params) 
 		@post.save
-    p "**********"
-    p @post
     response = @post
     p response
     respond_to do |format|
