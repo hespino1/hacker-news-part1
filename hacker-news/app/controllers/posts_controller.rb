@@ -7,7 +7,9 @@ class PostsController < ApplicationController
   def upvote
   	@vote = Vote.new(post_id: params[:post_id])
   	@vote.save
-  	redirect_to root_path
+    head :no_content 
+  	# redirect_to root_path
+
   end
 
   def new
@@ -18,7 +20,6 @@ class PostsController < ApplicationController
   	@post = Post.new(post_params) 
 		@post.save
     response = @post
-    p response
     respond_to do |format|
       format.json { render json: response}
       format.html
@@ -28,8 +29,9 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find((params[:id]))
     @post.destroy
-    redirect_to root_path
+    head :no_content 
   end
+
 
   def form
     @post = Post.new

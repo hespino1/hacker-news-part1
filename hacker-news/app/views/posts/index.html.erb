@@ -15,10 +15,10 @@
 		<% @posts.each do |post| %>
 			<tr>
 				<td><%= @counter += 1%></td>
-				<td><%= link_to "^", posts_upvote_path(:post_id => post.id)%></td>				
+				<td class="upvote"><%= link_to "^", posts_upvote_path(:post_id => post.id), id:"upvote"%></td>				
 				<td><%= post.votes.count %></td>
 				<td><%= post.title %></td>
-				<td><%= link_to "Delete", post_path(post), method: :delete %></td>
+				<td class="delete"><%= link_to "Delete", post_path(post), id:"delete" %></td>
 			</tr>
 		<% end %>
 

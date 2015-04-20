@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	$(".create").on('click', function(e){
-		console.log("**********")
 		$.ajax ({
 			url: "/posts/form",
 			type: "GET"
@@ -8,7 +7,8 @@ $(document).ready(function(){
 			$(".form-container").append(response);
 			$(".create").hide();
 		});
-	})	
+	})
+
 	$(".form-container").on('submit', function(e){
 		e.preventDefault();
 		$.ajax ({
@@ -20,8 +20,35 @@ $(document).ready(function(){
 			$(".create").show();
 			$(".form-container").hide();
 			var counter = +$("tr:last-child").find("td:first-child").text() +1;
-			$(".table").append("<tr><td>" + counter +"</td><td><a href=/posts/upvote?post_id="+response.id+">^</a></td><td>0</td><td>"+response.title+"</td><td><a rel='nofollow' data-method='delete' href='/posts/" + response.id + "'>Delete</a></td></tr>")
+			$(".table").append("<tr><td>" + counter +"</td><td class='upvote'><a href=/posts/upvote?post_id="+response.id+">^</a></td><td>0</td><td>"+response.title+"</td><td class='delete'><a href='/posts/" + response.id + "'>Delete</a></td></tr>")
 		})
-
 	})
+
+	$(".table").on("click", ".delete a", function(e){
+		var row = $(this).parent().parent();	
+		e.preventDefault();
+		url = $(this).attr('href')
+		$.ajax ({
+			url: url,
+			type: "DELETE",
+			dataType: "json",
+		}).done(function(response){
+			row.remove();
+		})
+	});
+
+	$(".table").on("click", ".upvote a", function(e){
+		e.preventDefault();
+		console.log("Hello");
+		url = $(this).attr('href');
+		console.log(url)
+		var votes = +$(this).parent().next().html() + 1;
+		var voteColumn = $(this).parent().next();
+		$.ajax ({
+			url: url,
+			type: "GET"
+		}).done(function(){
+			voteColumn.html(votes);
+		})
+	});
 });
